@@ -1,0 +1,114 @@
+信息: 正在处理符号 'C1:Capacitor_THT:CP_Radial_D10.0mm_P5.00mm'。
+信息: 正在处理符号 'C2:Capacitor_THT:C_Disc_D3.0mm_W1.6mm_P2.50mm'。
+信息: 正在处理符号 'C3:Capacitor_THT:CP_Radial_D10.0mm_P5.00mm'。
+信息: 正在处理符号 'U1:Package_TO_SOT_THT:TO-220-3_Vertical'。
+信息: 正在处理符号 'U2:Package_TO_SOT_THT:TO-220-5_P3.4x3.7mm_StaggerOdd_Lead3.8mm_Vertical'。
+信息: 正在处理符号 'L1:Inductor_THT:L_Axial_L5.3mm_D2.2mm_P2.54mm_Vertical_Vishay_IM-1'。
+信息: 正在处理符号 'L2:Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical'。
+信息: 正在处理符号 'Q2:Package_TO_SOT_THT:TO-92L'。
+信息: 正在处理符号 'Q1:Package_TO_SOT_THT:TO-92_Inline'。
+信息: 正在处理符号 'C7:Capacitor_THT:C_Axial_L5.1mm_D3.1mm_P10.00mm_Horizontal'。
+信息: 正在处理符号 'R1:Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P2.54mm_Vertical'。
+信息: 正在处理符号 'R2:Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal'。
+信息: 正在处理符号 'R3:Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal'。
+信息: 正在处理符号 'C4:Capacitor_THT:CP_Radial_D10.0mm_P5.00mm'。
+信息: 正在处理符号 'R4:Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal'。
+信息: 正在处理符号 'R5:Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal'。
+信息: 正在处理符号 'R6:Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal'。
+信息: 正在处理符号 'R7:Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal'。
+信息: 正在处理符号 'R8:Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal'。
+信息: 正在处理符号 'R9:Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal'。
+信息: 正在处理符号 'R10:Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal'。
+信息: 正在处理符号 'C8:Capacitor_THT:CP_Radial_D12.5mm_P5.00mm'。
+信息: 正在处理符号 'C9:Capacitor_THT:CP_Radial_D5.0mm_P2.00mm'。
+信息: 正在处理符号 'D1:Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal'。
+信息: 正在处理符号 'C5:Capacitor_THT:CP_Radial_D5.0mm_P2.00mm'。
+信息: 正在处理符号 'C6:Capacitor_THT:CP_Radial_D10.0mm_P5.00mm'。
+信息: 正在处理符号 'D2:LED_THT:LED_D3.0mm'。
+信息: 正在处理符号 'F1:Fuse:Fuseholder_Cylinder-5x20mm_Bulgin_FX0456_Vertical_Closed'。
+信息: 正在处理符号 'J1:Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical'。
+信息: 正在处理符号 'R11:Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal'。
+添加了 C3 (封装 'Capacitor_THT:CP_Radial_D10.0mm_P5.00mm')。
+已将 REF** 的位号更改为 C3。
+已将 C3 的值从 'CP_Radial_D10.0mm_P5.00mm' 修改为 '1000u/25V'。
+将 C3 符号分配从  更新到 /d43357e1-f770-4cb8-9019-0db333506edd。
+已更新 C3 个字段。
+已将 C3 图纸名称更新为 '/'。
+已将 C3 图纸文件更新为 'zy1.kicad_sch'。
+已将 C3 封装筛选规则更新为 'CP_*'。
+将 C3 引脚 2 连接到了 GND。
+将 C3 引脚 1 连接到了 Net-(L2-Pin_1)。
+添加了 C4 (封装 'Capacitor_THT:CP_Radial_D10.0mm_P5.00mm')。
+已将 REF** 的位号更改为 C4。
+已将 C4 的值从 'CP_Radial_D10.0mm_P5.00mm' 修改为 '2.2u/50V'。
+将 C4 符号分配从  更新到 /27002d54-b83e-449b-88da-1400dde2efa7。
+已更新 C4 个字段。
+已将 C4 图纸名称更新为 '/'。
+已将 C4 图纸文件更新为 'zy1.kicad_sch'。
+已将 C4 封装筛选规则更新为 'CP_*'。
+将 C4 引脚 1 连接到了 Net-(U2-+)。
+将 C4 引脚 2 连接到了 Net-(Q2-D)。
+添加了 C6 (封装 'Capacitor_THT:CP_Radial_D10.0mm_P5.00mm')。
+已将 REF** 的位号更改为 C6。
+已将 C6 的值从 'CP_Radial_D10.0mm_P5.00mm' 修改为 '22u/25V'。
+将 C6 符号分配从  更新到 /eaad501d-8327-49d8-a903-c6d3d592f510。
+已更新 C6 个字段。
+已将 C6 图纸名称更新为 '/'。
+已将 C6 图纸文件更新为 'zy1.kicad_sch'。
+已将 C6 封装筛选规则更新为 'CP_*'。
+将 C6 引脚 1 连接到了 Net-(C6-Pad1)。
+将 C6 引脚 2 连接到了 GND。
+添加了 C7 (封装 'Capacitor_THT:C_Axial_L5.1mm_D3.1mm_P10.00mm_Horizontal')。
+已将 REF** 的位号更改为 C7。
+已将 C7 的值从 'C_Axial_L5.1mm_D3.1mm_P10.00mm_Horizontal' 修改为 '0.1u(104)'。
+将 C7 符号分配从  更新到 /5108edd8-ffaf-47c2-88cb-4ad696bb2643。
+已更新 C7 个字段。
+已将 C7 图纸名称更新为 '/'。
+已将 C7 图纸文件更新为 'zy1.kicad_sch'。
+已将 C7 封装筛选规则更新为 'C_*'。
+将 C7 引脚 1 连接到了 Net-(C7-Pad1)。
+将 C7 引脚 2 连接到了 GND。
+添加了 J1 (封装 'Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical')。
+已将 REF** 的位号更改为 J1。
+已将 L1 图纸文件更新为 'zy1.kicad_sch'。
+已将 L1 封装筛选规则更新为 'Choke_* *Coil* Inductor_* L_*'。
+将 L1 引脚 1 连接到了 Net-(L2-Pin_1)。
+将 L1 引脚 2 连接到了 Net-(U1-OUT)。
+已更新 J1 个字段。
+添加了 L2 (封装 'Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical')。
+已将 REF** 的位号更改为 L2。
+已将 L2 的值从 'PinHeader_1x08_P2.54mm_Vertical' 修改为 'Conn_01x08_Pin'。
+将 L2 符号分配从  更新到 /9dd86d1e-6678-4538-a76a-32e837a5a637。
+已更新 L2 个字段。
+已将 L2 图纸名称更新为 '/'。
+已将 L2 图纸文件更新为 'zy1.kicad_sch'。
+已将 J1 图纸名称更新为 '/'。
+添加网络 unconnected-(L2-Pin_7-Pad7)。
+将 L2 引脚 7 连接到了 unconnected-(L2-Pin_7-Pad7)。
+将 L2 引脚 2 连接到了 GND。
+添加网络 unconnected-(L2-Pin_3-Pad3)。
+将 L2 引脚 3 连接到了 unconnected-(L2-Pin_3-Pad3)。
+将 L2 引脚 1 连接到了 Net-(L2-Pin_1)。
+将 L2 引脚 6 连接到了 Net-(L2-Pin_6)。
+将 L2 引脚 4 连接到了 Net-(L2-Pin_1)。
+添加网络 unconnected-(L2-Pin_8-Pad8)。
+将 L2 引脚 8 连接到了 unconnected-(L2-Pin_8-Pad8)。
+将 L2 引脚 5 连接到了 Net-(L2-Pin_5)。
+已将 J1 图纸文件更新为 'zy1.kicad_sch'。
+已将 J1 的值从 'PinHeader_1x03_P2.54mm_Vertical' 修改为 'Conn_01x03_Pin'。
+已将 J1 封装筛选规则更新为 'Connector*:*_1x??_*'。
+将 J1 引脚 3 连接到了 Net-(J1-Pin_3)。
+将 J1 引脚 1 连接到了 GND。
+添加网络 unconnected-(J1-Pin_2-Pad2)。
+将 J1 引脚 2 连接到了 unconnected-(J1-Pin_2-Pad2)。
+将 J1 符号分配从  更新到 /8ff6137d-592f-47e8-9558-658cea7f75ef。
+添加了 L1 (封装 'Inductor_THT:L_Axial_L5.3mm_D2.2mm_P2.54mm_Vertical_Vishay_IM-1')。
+已将 REF** 的位号更改为 L1。
+已将 L1 的值从 'L_Axial_L5.3mm_D2.2mm_P2.54mm_Vertical_Vishay_IM-1' 修改为 '1mH'。
+将 L1 符号分配从  更新到 /a3c48e73-b5fb-4cc8-85fe-71ca9a9dbb53。
+已更新 L1 个字段。
+已将 L1 图纸名称更新为 '/'。
+已将 L2 封装筛选规则更新为 'Connector*:*_1x??_*'。
+
+
+信息: 总计警告: 0, 错误: 0。
