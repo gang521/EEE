@@ -1,129 +1,166 @@
-//22343057 裴永卓 物理学院光电信息科学与工程
-//舵机控制超声波探测
+//22343057 裴永卓
+//物理学院光电信息科学与工程
+//data：20250326
+//https://github.com/gang521/EEE.git
+//简介：舵机控制超声波探测——课程作业
+//功能概述：
+//  1.单击切换快速慢速模式
+//  2.长按进入扫描模式
+//  3.双击进入动态测量模式，再双击退出（优先级最高）
+//硬件连接：
+//  舵机        -> 9
+//  TRIG  -> 12
+//  ECHO  -> 11
+//  摇杆X轴     -> A3
+//  摇杆Y轴     -> A4
+//  摇杆SW    -> 4
+
 #include <Servo.h>
 
-int Trig = 12
-int Echo = 11; 
-int pinServo = 9; 
-int pinX = A3
+int Trig = 12;
+int Echo = 11;
+int pinServo = 9;
+int pinX = A3;
 int pinY = A4;
 int pinSw = 4;
+Servo servo;
 
-bool fastMode = true;        // 快速测量模式 (true) / 慢速测量模式 (false)
-bool scanMode = false;       // 扫描模式状态
-bool dynamicMode = false;    // 动态频率模式状态
-unsigned long pressStart = 0;// 按键按下时间记录变量
-unsigned long lastDebounceTime = 0; // 上次去抖时间
-unsigned long lastClickTime = 0;    // 上次点击时间
-bool waitingForDoubleClick = false; // 是否在等待双击
-Servo myServo;               // 创建舵机对象
+int currentMode = 0; // 0慢速,1快速,2动态模式
+bool scanning = false;
+unsigned long lastDebounceTime = 0;
+unsigned long debounceDelay = 50; //防抖记录
+bool buttonState = HIGH;
+bool lastButtonState = HIGH;
+unsigned long buttonPressStart = 0;
+bool isLongPress = false;
+unsigned long lastClickTime = 0; // 记录上次单击时间
+float measureDistance();
+void handleJoystick();
+void toggleMode();
+void scanMode();
+void toggleMeasurementMode(); // 双击切换动态模式
 
-// 超声波距离测量函数
-int measureDistance() {
-  digitalWrite(Trig, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(Trig, LOW);
-  return pulseIn(Echo, HIGH) / 58; // 计算并返回距离值
-}
+int angle = 90;
 
 void setup() {
-  pinMode(Trig, OUTPUT);
-  pinMode(Echo, INPUT);
-  pinMode(pinSw, INPUT_PULLUP);
-  Serial.begin(9600);
-  
-  myServo.attach(pinServo);
-  myServo.write(90); // 初始化舵机角度为90度
+    servo.attach(pinServo);
+    servo.write(angle);
+
+    pinMode(Trig, OUTPUT);
+    pinMode(Echo, INPUT);
+    pinMode(pinSw, INPUT_PULLUP);
+
+    Serial.begin(9600);
+}
+
+float measureDistance() {
+    digitalWrite(Trig, LOW);
+    delayMicroseconds(2);
+    digitalWrite(Trig, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(Trig, LOW);
+
+    long duration = pulseIn(Echo, HIGH);
+    float distance = duration * 0.034 / 2; 
+    return distance;
+}
+
+// 慢速 <-> 快速
+void toggleMode() {
+    if (currentMode != 2) { // 仅在固定模式下切换
+        currentMode = (currentMode == 0) ? 1 : 0;
+        Serial.println(currentMode == 1 ? "Fast Mode (100ms interval)" : "Slow Mode (1s interval)");
+    }
+}
+
+// 扫描模式
+void scanMode() {
+    scanning = true;
+    for (int i = 0; i <= 180; i += 10) {
+        servo.write(i);
+        delay(500);
+        float distance = measureDistance();
+        Serial.print("Scan Angle: ");
+        Serial.print(i);
+        Serial.print(", Distance: ");
+        Serial.println(distance);
+    }
+    servo.write(angle); // 复位
+    scanning = false;
+}
+
+// 双击动态
+void toggleMeasurementMode() {
+    if (currentMode == 2) {
+        currentMode = 0; // 退出动态
+        Serial.println("Exiting Dynamic Measurement Mode, switching to Slow Mode");
+    } else {
+        currentMode = 2; // 进入动态模式
+        Serial.println("Entering Dynamic Measurement Mode");
+    }
+}
+
+void handleJoystick() {
+    int xValue = analogRead(pinX);
+    int yValue = analogRead(pinY);
+    angle = map(xValue, 0, 1023, 0, 180);
+    servo.write(angle);
 }
 
 void loop() {
-  int resultX = analogRead(pinX) - 512; // 读取摇杆X轴偏移量
-  int resultY = analogRead(pinY) - 512; // 读取摇杆Y轴偏移量
-  int buttonState = digitalRead(pinSw); // 读取摇杆按钮状态
-  
-  // 计算摇杆控制的角度值
-  float angle = atan2(resultY, resultX) * 180.0 / PI;
-  angle = map(angle, -180, 180, 0, 180);
+    handleJoystick();
 
-  if (angle >= 0 && angle <= 180) {
-    myServo.write(angle); // 根据计算角度控制舵机
-    Serial.print("当前角度: ");
-    Serial.println(angle);
-  } else {
-    Serial.println("角度计算超出有效范围");
-  }
+    int reading = digitalRead(pinSw);
 
-  // 按钮去抖动检测
-  if (buttonState == LOW) {
-    if (millis() - lastDebounceTime > 50) { // 去抖动时间间隔
-      if (pressStart == 0) pressStart = millis(); // 记录按钮按下时间
-      
-      if (millis() - pressStart >= 2000) {  // 长按操作，进入扫描模式
-        scanMode = true;
-        Serial.println("已进入扫描模式");
-        pressStart = 0;
-      }
-      
-      lastDebounceTime = millis();
+    if (reading != lastButtonState) {
+        lastDebounceTime = millis();
     }
-  } else {  
-    if (pressStart > 0) {
-      if (millis() - pressStart < 2000) {  // 短按操作
-        if (waitingForDoubleClick) {
-          if (millis() - lastClickTime < 300) { // 双击时间间隔
-            dynamicMode = !dynamicMode;
-            Serial.print("切换到 ");
-            Serial.println(dynamicMode ? "动态频率模式" : "固定频率模式");
-            waitingForDoubleClick = false;
-          } else {
-            waitingForDoubleClick = false;
-          }
-        } else {
-          // 单击切换测量模式
-          fastMode = !fastMode;
-          Serial.print("当前测量模式: ");
-          Serial.println(fastMode ? "快速模式 (100ms)" : "慢速模式 (1s)");
-          lastClickTime = millis();
-          waitingForDoubleClick = true;
+
+    if ((millis() - lastDebounceTime) > debounceDelay) {
+        if (reading != buttonState) {
+            buttonState = reading;
+
+            if (buttonState == LOW) {
+                unsigned long now = millis();
+                if (now - lastClickTime < 500) { 
+                    toggleMeasurementMode(); //
+                }
+                lastClickTime = now;
+                buttonPressStart = millis();
+                isLongPress = false;
+            } else {
+                if (!isLongPress && millis() - buttonPressStart >= 50) { // 短按
+                    toggleMode(); 
+                }
+            }
         }
-      }
-      pressStart = 0;
-    }
-  }
 
-  // 扫描模式运行逻辑
-  if (scanMode) {
-    for (int scanAngle = 0; scanAngle <= 180; scanAngle += 15) {
-      myServo.write(scanAngle); // 调整舵机到扫描角度
-      delay(500); // 短暂延时稳定测量
-      int distance = measureDistance(); // 获取当前角度下的距离
-      Serial.print("扫描角度: ");
-      Serial.print(scanAngle);
-      Serial.print("°, 测量距离: ");
-      Serial.print(distance);
-      Serial.println(" cm");
+        if (buttonState == LOW && (millis() - buttonPressStart >= 2000)) {
+            isLongPress = true;
+            scanMode(); // 长按
+        }
     }
-    Serial.println("扫描完成，恢复初始位置");
-    myServo.write(angle); // 扫描结束后恢复到之前角度
-    scanMode = false;
-  } else {
-    // 根据摇杆偏移量计算动态频率
-    int offset = sqrt(resultX * resultX + resultY * resultY);
-    int delayTime = map(offset, 0, 512, 100, 1000); // 偏移越大，延迟越小
-    delayTime = constrain(delayTime, 100, 1000); // 限制在合理范围
-    
-    // 动态模式下使用计算的延迟时间，否则使用固定模式
-    if (dynamicMode) {
-      delay(delayTime);
-    } else {
-      delay(fastMode ? 100 : 1000);
+
+    lastButtonState = reading;
+
+    if (!scanning) {
+        static unsigned long lastMeasureTime = 0;
+        unsigned long interval;
+
+        if (currentMode == 2) { // 动态
+            int xValue = analogRead(pinX);
+            int yValue = analogRead(pinY);
+            int distanceFromCenter = abs(xValue - 512) + abs(yValue - 512);
+            interval = map(distanceFromCenter, 0, 1023, 1000, 100); // 1s 到 100ms
+        } else { 
+            interval = (currentMode == 0) ? 1000 : 100; // 1s (慢)或100ms (快)
+        }
+
+        if (millis() - lastMeasureTime > interval) {
+            lastMeasureTime = millis();
+            float distance = measureDistance();
+            Serial.print("Distance: ");
+            Serial.println(distance);
+        }
     }
-    
-    int distance = measureDistance(); // 获取当前距离
-    Serial.print("当前角度: ");
-    Serial.print(angle);
-    Serial.print("°, 测量距离: ");
-    Serial.print(distance);
-    Serial.println(" cm");
-  }
 }
